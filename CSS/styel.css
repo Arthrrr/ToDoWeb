@@ -1,0 +1,235 @@
+/* Fonts we are going to use*/
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.container
+{
+    height: 100vh;
+    width: 100%;
+    /*Hace que vaya uno al lado de otro*/
+    display: flex;
+    /*Alinea en el centro de la pantalla verticalmente*/
+    align-items: center;
+    /*Alinea en el centro de la pantalla horizontalmente*/
+    justify-content: center;
+    /*background: linear-gradient(#E190DE, 50%, #58299B);*/
+    column-gap: 30px;
+
+    background-color:  #523060 ;
+}
+
+.form
+{   
+    /* especifica el ancho máximo del elemento en píxeles (430px). La segunda propiedad, width, define el ancho del elemento en porcentaje del tamaño de su contenedor (100%). Esto significa que el ancho del elemento será el mismo que el ancho de su contenedor, pero no será mayor de 430 píxeles*/
+    max-width: 430px;
+    width: 84%;
+    padding: 30px;
+    border-radius: 6px;
+    position: absolute;
+    margin-bottom: 30%;
+}
+
+.form.signup {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.forms.show-signup .form.signup {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.forms.show-signup .form.login {
+    opacity: 0;
+    pointer-events: none;
+}
+
+ 
+header
+{
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+
+}
+
+
+
+.logo-solito
+{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 12px;
+}
+
+.header-logo
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 13px ;
+    padding: 7px;
+}
+
+
+
+
+
+.form .field 
+{
+    position: relative;
+    height: 50px;
+    width: 100px;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.field input,
+.field button
+{
+    height: 100%;
+    width: 300%;
+    border: none;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 18px;
+    color: white
+    
+}
+.field button
+{
+    background-color: #ff9e23;
+}
+
+.field input
+{
+    /*Son email y password inputs*/
+    outline-color: #CACACA;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0 15px;
+    border: 1px solid #CACACA;
+    color: black;
+}
+
+
+.eye-icon-password
+{
+    position: absolute;
+    top: 50%;
+    right: -180px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #8b8b8b;
+    cursor: pointer;
+}
+
+.field button
+{
+    color: #fff;
+    background-color: #ff9e23;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.field button:hover
+{
+    background-color: #58299B;
+}
+
+.form-link
+{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.form-link span
+{
+    /*Este es el texto de already have an account*/
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+}
+
+.form-link a
+{
+    /*Estos son los forgot password y sign up*/
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.form a
+{
+    /*Estos son los forgot password y sign up*/
+    text-decoration: none;
+    color: #E190DE;
+}
+
+form a:hover
+{
+    /*Estos son los forgot password y sign up pero cuando se para encima se pone la rayita*/
+    text-decoration: underline;
+}
+
+.line
+{
+    /*linea login*/
+    position: relative;
+    height: 1px;
+    width: 100%;
+    margin-top: 40px;
+    background-color: #E190DE;
+}
+
+.line::before
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #E190DE;
+    color: white;
+    padding: 0 17px;
+    border-radius: 11px;
+}
+
+
+.media-options a
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google-button
+{
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.loginGoogleText
+{
+    margin-bottom: -1px;
+    color: white;
+    margin-left: 4px;
+}
+
+a.google-button .google-icon
+{
+    height: 25px;
+    width: 25px;
+    color: #E190DE;
+    font-size: 25px;
+}
+
+  
