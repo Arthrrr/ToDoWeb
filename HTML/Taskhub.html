@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="field button-field">
-                        <button>Login</button>
+                        <button id="login-button" >Login</button>
                     </div>
 
                     <div class="form-link">
@@ -45,15 +45,14 @@
                             <a href="#" class="link signup-link">Sign up</a> 
                         </span>
                     </div>
-                    <div class="line"></div>
+                    <!-- <div class="line"></div>
 
                     <div class="media-options">
                         <a href="" class="google-button" id="btnGoogle">
                             <img src="/Imgs-Proyecto/google-logo.png" alt="" class="google-icon">
-                            <!-- <i class='bx bxl-google google-icon'></i> -->
                             <span class="loginGoogleText">Login with Google</span>
                         </a>
-                    </div>
+                    </div> -->
                 </form>
             </div>
             
@@ -66,27 +65,31 @@
         <div class="form signup">
             <div class="form content">
                 <div class="header-logo">
-                 <img src="Imgs-Proyecto/Logo-Final.png" alt="TaskHub Logo" class="logo-solito" >
+                 <img src="/Imgs-Proyecto/Logo-Final.png" alt="TaskHub Logo" class="logo-solito" >
                  <header>Signup</header>
                 <span>Please enter the information</span>
                 </div>
                 
                 <form action="#">
+
                     <div class="field input-field">
-                        <input type="email" class="input" placeholder="Email">
+                        <input id="username" name="username" type="text" class="input" placeholder="Username">
                     </div>
 
                     <div class="field input-field">
-                        <input type="password" class="password" placeholder="Password">
+                        <input id="Email" name="Email" type="Email" class="input" placeholder="Email">
+                    </div>
+            
+                    <div class="field input-field">
+                        <input id="password1" name="password1" type="password"  placeholder="Password">
                     </div>
 
                     <div class="field input-field">
-                        <input type="password" class="password" placeholder="Password">
-                        <i class='bx bxs-hide eye-icon-password' ></i>
+                        <input id="password2" name="password2" type="password" placeholder="Confirm Password">
                     </div>
 
                     <div class="field button-field">
-                        <button>Signup</button>
+                        <button id="signUp">Signup</button>
                     </div>
 
                     <div class="form-link">
@@ -102,65 +105,68 @@
 
     <!-- JAVASCRIPT -->
 
-    <script src="/js/Taskhub.js"></script>
 
-
-
-
-    <!-- FIREBASE CONNECTION -->
+    <!-- Realtime database -->
     <script type="module">
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-        //import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
-        import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+        import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
       
         // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-          apiKey: "AIzaSyB0-U18_m7DJMrTi3TaAYe3v8T-Mtyz_Uo",
-          authDomain: "taskhub-b838b.firebaseapp.com",
-          projectId: "taskhub-b838b",
-          storageBucket: "taskhub-b838b.appspot.com",
-          messagingSenderId: "366036395015",
-          appId: "1:366036395015:web:d3281209090f43bc53b6a2",
-          measurementId: "G-RTCH5J1SWN"
+          apiKey: "AIzaSyB2G2mqCwNPa0nskmzxGcNvGBNgOT5l540",
+          authDomain: "to-do-list-dce75.firebaseapp.com",
+          projectId: "to-do-list-dce75",
+          storageBucket: "to-do-list-dce75.appspot.com",
+          messagingSenderId: "162155799901",
+          appId: "1:162155799901:web:2db127c184835d16e1f4b4"
         };
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider(app);
-        // btnGoogle.addEventListener('click',(e) => { signInWithRedirect(auth, provider); });
-        const googleButton = document.querySelector('.google-button');
-            googleButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            signInWithRedirect(auth, provider);
-            });
+        const database = getDatabase(app);
+        const auth = getAuth();
 
+        signUp.addEventListener('click', (e) => {
+                var username = document.getElementById('username').value;
+                var email = document.getElementById('email').value;
+                var password1 = document.getElementById('password1').value;
+                var password2 = document.getElementById('password2').value;
+                const passwordInputs = document.querySelectorAll('.form.signup input[type="password"]');
 
-        getRedirectResult(auth)
-        .then((result) => {
-            // This gives you a Google Access Token. You can use it to access Google APIs.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+                if (password1 === password2) {
+                    createUserWithEmailAndPassword(auth, email, password1)
+                        .then((userCredential) => {
+                            const user = userCredential.user;
 
-            // The signed-in user info.
-            const user = result.user;
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
+                            set(ref(database, 'users/' + user.uid), {
+                                username: username,
+                                email: email
+                            })
+
+                            alert('Su usuario ha sido creado!')
+                        })
+                        .catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+
+                            alert(errorMessage);
+                            // ..
+                        });
+
+                } else {
+                    alert('Las contraseñas no coinciden');
+                    passwordInputs.forEach(input => input.value = '');
+                    e.preventDefault();
+                    return;
+                }
         });
-      </script>
+    </script>
+
+<script src="/js/Taskhub.js"></script>
+
 </body>
 </html>
